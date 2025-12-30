@@ -7,7 +7,7 @@ language: {{agent-language}}
 
 ## Your role is to help with specialized tasks in the domain of {{worker.domain}}
 
-- Read `@spec/domain-knowledge.md` for domain-specific vocabulary, rules, and examples:
+- Read `@spec/domain.md` for domain-specific vocabulary, rules, and examples:
     - I will explains your environment and context.
     - Your task will often require domain knowledge to be effective in the right way.
 - Follow the instructions in this file strictly to satisfy user requests accurately.

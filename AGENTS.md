@@ -27,7 +27,20 @@ This will be done in two main stages:
 - **Specification** of the supervisor and specialized workers.
 - **Compilation** of the supervisor and specialized workers using the provided templates.
 
-### First stage: Specification
+!IMPORTANT: During the specification stage, focus on gathering all necessary information to create a comprehensive plan for the supervisor and specialized workers.  
+The specifications must be clear, the plan must be detailed and filled with checklists to track progress. Do not proceed to compilation until the specification stage is complete.
+
+## Iterations: dialogue with the user
+
+You will interact with the user to define the needs of the supervisor and specialized workers.
+
+Based on the information provided by the user, you will enrich `domain.md` and update `plans.md` to reflect the progress made.
+
+At each step, you will ask the user for clarifications if needed, until you have a clear understanding of the requirements and the plan is complete.
+
+!IMPORTANT: Ask clarifying only one item at a time, with a maximum of 3 proposals for each item.
+
+## First stage: Specification
 
 1. **Identify whether a supervisor is being created**: Check whether a supervisor is being created in the `specs/{{supervisor-id}}` directory. If yes, continue; if not, ask for confirmation before creating the supervisor directory.
 2. **Create the directory structure**: If the supervisor directory does not exist, create the following structure:
@@ -42,20 +55,37 @@ This will be done in two main stages:
 3. **Generate the supervisor plan**: Write the `plans.md` file to help you track progress in creating the supervisor and specialized workers.
 4. **Create the domain specification**: Create the `domain.md` file that describes the business domain, key processes, and requirements.
 
-#### Business domain (domain.md)
+### Business domain (domain.md)
 
 This is where you document the business domain, key processes, and requirements for the supervisor and specialized workers.
 The user will provide information about the business domain and key processes. This document will serve as a reference to update your plan.
 This document will be written in natural language and will provide the human view of the tasks to be accomplished.
-Your task is to translate this view into a clear, testable technical specification in the agent specification files.
+Your task is to translate this view into a clear specification for the supervisor and specialized workers.
 
-#### The Plan (plans.md)
+### The plan (plan.md)
 
 This is your tracking document for creating the supervisor and specialized workers.
-You will use this file to document the steps, decisions, and progress made in creating the agent.
+You will use this file to document the steps, decisions, and progress made in creating the supervisor and specialized workers orchestrated within a workflow.
 
-You will structure this file into sections, each corresponding to a key stage of the agent creation process. The sections contain checklists to track progress.
-You must qualify these sections based on their specification maturity:
+You must decide of a workflow that makes sense for the business domain and the tasks to be accomplished.
+The workflow represents the sequence of actions performed by workers under the supervision of the supervisor.
+
+You will structure this file into two main sections:
+1. **Workflow definition**: Define the workflow that the supervisor and specialized workers will follow.
+2. **Workers attributions**: Define the attributes of each specialized worker.
+
+#### Worker workspace
+
+For each specialized worker, define a workspace structure that outlines how the worker will organize its files and resources.
+A workspace can be:
+- A directory structure that organizes files and resources.
+- A set of tools it had access to.
+
+!IMPORTANT: The workspace structure must be clear and detailed enough to guide the worker in organizing its resources effectively with no ambiguity. Resources must be relevant to the worker's tasks.
+
+#### Checklists
+
+Each section will contain a comprehensive checklist to track progress.
 
 - **TODO**: The section is planned but has not started yet.
 - **IN PROGRESS**: The section is being written or revised.
@@ -69,16 +99,31 @@ Each checklist item must include a description of the task, its status (to do, i
 ```markdown
 # Plan for supervisor {{supervisor-id}}
 
-## Business domain definition [ TODO | IN PROGRESS | TO CLARIFY | SPECIFIED ]
+## Workflow definition
+
+### Steps {{ step.id }}
+- {{ step.description }} [ TODO | IN PROGRESS | TO CLARIFY | SPECIFIED ]
+
+## Workers attributions
+
+### Worker {{ worker.id }}
+- {{ worker.description }} [ TODO | IN PROGRESS | TO CLARIFY | SPECIFIED ]
 ```
 
-#### Iterations: dialogue with the user
+#### Data structure for {{worker.id}}
 
-You will interact with the user to define the needs of the supervisor and specialized workers.
-
-Based on the information provided by the user, you will enrich `domain.md` and update `plans.md` to reflect the progress made.
-
-At each step, you will ask the user for clarifications if needed, until you have a clear understanding of the requirements and the plan is complete.
+```text
+@workspace/
+├── input/
+|   ├── {{input-file-1}}
+|   ├── {{input-file-2}}
+├── output/
+|   ├── {{output-file-1}}
+|   ├── {{output-file-2}}
+├── resources/
+|   ├── {{resource-file-1}}
+|   ├── {{resource-file-2}}
+```
 
 ### Second stage: Compilation
 
