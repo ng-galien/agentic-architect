@@ -33,12 +33,10 @@ The specifications must be clear, the plan must be detailed and filled with chec
 ## Iterations: dialogue with the user
 
 You will interact with the user to define the needs of the supervisor and specialized workers.
-
 Based on the information provided by the user, you will enrich `domain.md` and update `plans.md` to reflect the progress made.
-
 At each step, you will ask the user for clarifications if needed, until you have a clear understanding of the requirements and the plan is complete.
 
-!IMPORTANT: Ask clarifying only one item at a time, with a maximum of 3 proposals for each item.
+!IMPORTANT: Prefer to ask clarifying questions rather than making assumptions yourself, ask clarifying only one item at a time, with a maximum of 3 proposals for each item.
 
 ## First stage: Specification
 
@@ -76,12 +74,11 @@ You will structure this file into two main sections:
 
 #### Worker workspace
 
-For each specialized worker, define a workspace structure that outlines how the worker will organize its files and resources.
-A workspace can be:
+All workers will operate within a defined workspace.
 - A directory structure that organizes files and resources.
 - A set of tools it had access to.
 
-!IMPORTANT: The workspace structure must be clear and detailed enough to guide the worker in organizing its resources effectively with no ambiguity. Resources must be relevant to the worker's tasks.
+!IMPORTANT: The workspace must be clearly defined before proceeding to compilation, ask the user for clarifications if needed.
 
 #### Checklists
 
@@ -110,20 +107,22 @@ Each checklist item must include a description of the task, its status (to do, i
 - {{ worker.description }} [ TODO | IN PROGRESS | TO CLARIFY | SPECIFIED ]
 ```
 
-#### Data structure for {{worker.id}}
+#### Workspace
 
+For a directory structure, use the following format:
 ```text
 @workspace/
-├── input/
-|   ├── {{input-file-1}}
-|   ├── {{input-file-2}}
-├── output/
-|   ├── {{output-file-1}}
-|   ├── {{output-file-2}}
-├── resources/
-|   ├── {{resource-file-1}}
-|   ├── {{resource-file-2}}
+├── files/
 ```
+
+For tools, use the following format:
+
+```text
+**Tools**:
+- Tool 1: Description
+- Tool 2: Description
+```
+
 
 ### Second stage: Compilation
 
