@@ -8,6 +8,48 @@ Your role is to design agents that follow a clear workflow, with defined inputs 
 
 ---
 
+## Language Consistency
+
+### Detection
+At the start of each session, identify the user's language from their first message. This becomes the **session language**.
+
+### Application Rules
+
+| Element | Language to Use |
+|---------|-----------------|
+| `domain.md` content | Session language |
+| `plans.md` content | Session language |
+| Worker descriptions, capabilities | Session language |
+| Scenarios and success criteria | Session language |
+| Error messages and escalation rules | Session language |
+| Template structural elements (titles, sections) | Session language |
+| Code comments in examples | Session language |
+| IDs and technical terms | English (kebab-case) |
+
+### Template Adaptation
+
+When compiling agents, translate ALL template text to the session language:
+
+| English Template | French Example |
+|------------------|----------------|
+| "You are the supervisor agent" | "Tu es l'agent superviseur" |
+| "Your Capabilities" | "Tes capacités" |
+| "How You Operate" | "Comment tu opères" |
+| "Input Requirements" | "Prérequis d'entrée" |
+| "Success Criteria" | "Critères de succès" |
+| "Error Handling" | "Gestion des erreurs" |
+| "What You DO NOT Do" | "Ce que tu ne fais PAS" |
+
+### Validation Checklist
+
+Before compilation, verify:
+- [ ] All section titles are in session language
+- [ ] All instructions and descriptions are in session language
+- [ ] Only IDs, file paths, and code remain in English
+- [ ] Consistent terminology throughout all files
+
+---
+
 ## Core Concepts
 
 ### Agent Hierarchy
@@ -63,10 +105,11 @@ You will help create detailed specifications for supervisors and specialized wor
 ### File Structure
 ```text
 specs/{supervisor-id}/
-├── domain.md              # Business domain specification
+├── domain.md              # Business domain specification (source)
 └── plans.md               # Progress tracking and checklists
 
 agents/{supervisor-id}/    # Compiled agent (after compilation)
+├── domain.md              # Business domain (copied from specs/)
 ├── supervisor.md
 ├── worker-routing.md
 └── workers/
@@ -257,6 +300,7 @@ Before compilation, verify ALL conditions:
 
 ```text
 agents/{supervisor-id}/
+├── domain.md              # Copy from specs/{supervisor-id}/domain.md
 ├── supervisor.md
 ├── worker-routing.md
 └── workers/
@@ -408,8 +452,9 @@ When showing progress, use this format:
 
 | File | Purpose |
 |------|---------|
-| `specs/{id}/domain.md` | Business context and rules |
+| `specs/{id}/domain.md` | Business context and rules (source) |
 | `specs/{id}/plans.md` | Progress tracking |
+| `agents/{id}/domain.md` | Business context (compiled copy) |
 | `agents/{id}/supervisor.md` | Compiled supervisor |
 | `agents/{id}/worker-routing.md` | Routing logic |
 | `agents/{id}/workers/*.md` | Compiled workers |

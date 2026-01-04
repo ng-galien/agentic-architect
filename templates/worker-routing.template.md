@@ -1,55 +1,62 @@
 --- 
-title: Worker Routing Logic
+title: {{_("Worker Routing Logic")}}
 domain: {{domain-summary}}
 language: {{routing-language}}
 version: 1.0
 ---
 
-# Worker Routing
+<!-- 
+  LANGUAGE INSTRUCTIONS:
+  All text in this template must be translated to {{routing-language}}.
+  Only keep IDs, file paths, and code blocks in English.
+  Translate: titles, descriptions, instructions, comments, table headers.
+-->
 
-This document defines how to route user requests to the appropriate specialized workers.
+# {{_("Worker Routing")}}
+
+{{_("This document defines how to route user requests to the appropriate specialized workers.")}}
 
 ---
 
-## Domain Overview
+## {{_("Domain Overview")}}
 
 {{domain-summary}}
 
 ---
 
-## Routing Principles
+## {{_("Routing Principles")}}
 
-### 1. Intent-First Matching
-- Identify the user's primary intent before selecting a worker
-- Look for action verbs and target objects in the request
-- Map intent to worker capabilities
+### 1. {{_("Intent-First Matching")}}
+- {{_("Identify the user's primary intent before selecting a worker")}}
+- {{_("Look for action verbs and target objects in the request")}}
+- {{_("Map intent to worker capabilities")}}
 
-### 2. Specificity Over Generality
-- Prefer workers with more specific matching criteria
-- If multiple workers match, choose the most specialized one
-- Avoid routing to a worker if only partially capable
+### 2. {{_("Specificity Over Generality")}}
+- {{_("Prefer workers with more specific matching criteria")}}
+- {{_("If multiple workers match, choose the most specialized one")}}
+- {{_("Avoid routing to a worker if only partially capable")}}
 
-### 3. Clarify When Uncertain
-- If confidence is below 80%, ask a clarifying question
-- Maximum 3 clarification rounds
-- Provide 2-3 options for the user to choose from
+### 3. {{_("Clarify When Uncertain")}}
+- {{_("If confidence is below 80%, ask a clarifying question")}}
+- {{_("Maximum 3 clarification rounds")}}
+- {{_("Provide 2-3 options for the user to choose from")}}
 
-### 4. Single Responsibility
-- Route to ONE worker per atomic task
-- For complex requests, break down into sequential tasks
-- Each worker handles one well-defined responsibility
+### 4. {{_("Single Responsibility")}}
+- {{_("Route to ONE worker per atomic task")}}
+- {{_("For complex requests, break down into sequential tasks")}}
+- {{_("Each worker handles one well-defined responsibility")}}
 
 ---
 
-## Available Workers
+## {{_("Available Workers")}}
 
 {{specialized-workers}}
 
 ---
 
-## Routing Decision Matrix
+## {{_("Routing Decision Matrix")}}
 
-| User Intent Pattern | Matched Worker | Confidence Threshold |
+| {{_("User Intent Pattern")}} | {{_("Matched Worker")}} | {{_("Confidence Threshold")}} |
 |---------------------|----------------|---------------------|
 | {intent-pattern-1} | {worker-id-1} | 80% |
 | {intent-pattern-2} | {worker-id-2} | 80% |
@@ -57,34 +64,34 @@ This document defines how to route user requests to the appropriate specialized 
 
 ---
 
-## Routing Algorithm
+## {{_("Routing Algorithm")}}
 
 ```
-1. RECEIVE user request
-2. EXTRACT intent and entities
-3. FOR EACH worker in available_workers:
-     - CALCULATE match_score based on:
-       a. Intent alignment (40%)
-       b. Required capabilities present (30%)
-       c. Input requirements satisfiable (20%)
-       d. Context relevance (10%)
-4. SELECT worker with highest match_score
-5. IF match_score < 80%:
-     - ASK clarifying question
-     - GOTO step 1 with additional context
-6. IF match_score >= 80%:
-     - DELEGATE to selected worker
-7. IF no worker matches after 3 attempts:
-     - APPLY fallback behavior
+1. {{_("RECEIVE user request")}}
+2. {{_("EXTRACT intent and entities")}}
+3. {{_("FOR EACH worker in available_workers:")}}
+     - {{_("CALCULATE match_score based on:")}}
+       a. {{_("Intent alignment")}} (40%)
+       b. {{_("Required capabilities present")}} (30%)
+       c. {{_("Input requirements satisfiable")}} (20%)
+       d. {{_("Context relevance")}} (10%)
+4. {{_("SELECT worker with highest match_score")}}
+5. {{_("IF match_score < 80%:")}}
+     - {{_("ASK clarifying question")}}
+     - {{_("GOTO step 1 with additional context")}}
+6. {{_("IF match_score >= 80%:")}}
+     - {{_("DELEGATE to selected worker")}}
+7. {{_("IF no worker matches after 3 attempts:")}}
+     - {{_("APPLY fallback behavior")}}
 ```
 
 ---
 
-## Intent Keywords
+## {{_("Intent Keywords")}}
 
-### Worker Selection Hints
+### {{_("Worker Selection Hints")}}
 
-| Keywords / Phrases | Likely Worker | Notes |
+| {{_("Keywords / Phrases")}} | {{_("Likely Worker")}} | {{_("Notes")}} |
 |-------------------|---------------|-------|
 | {keywords-1} | {worker-id-1} | {context-notes} |
 | {keywords-2} | {worker-id-2} | {context-notes} |
@@ -92,117 +99,117 @@ This document defines how to route user requests to the appropriate specialized 
 
 ---
 
-## Conflict Resolution
+## {{_("Conflict Resolution")}}
 
-When multiple workers could handle a request:
+{{_("When multiple workers could handle a request:")}}
 
-### Priority Rules
-1. **Most specific match wins** — Worker whose capabilities most closely match the request
-2. **Most constrained inputs wins** — Worker with stricter input requirements (more specialized)
-3. **User preference** — If still tied, ask user to choose
+### {{_("Priority Rules")}}
+1. **{{_("Most specific match wins")}}** — {{_("Worker whose capabilities most closely match the request")}}
+2. **{{_("Most constrained inputs wins")}}** — {{_("Worker with stricter input requirements (more specialized)")}}
+3. **{{_("User preference")}}** — {{_("If still tied, ask user to choose")}}
 
-### Disambiguation Questions
-Use this format when asking user to choose:
+### {{_("Disambiguation Questions")}}
+{{_("Use this format when asking user to choose:")}}
 ```
-Je peux vous aider de plusieurs façons :
+{{_("I can help you in several ways:")}}
 1. {Option A - worker-1 capability description}
 2. {Option B - worker-2 capability description}
 
-Laquelle correspond le mieux à votre besoin ?
+{{_("Which one best matches your need?")}}
 ```
 
 ---
 
-## Fallback Behavior
+## {{_("Fallback Behavior")}}
 
 {{fallback-behavior}}
 
-### Fallback Triggers
-- No worker matches with >50% confidence
-- User request is out of domain scope
-- Required inputs cannot be obtained
-- Maximum clarification rounds exceeded
+### {{_("Fallback Triggers")}}
+- {{_("No worker matches with >50% confidence")}}
+- {{_("User request is out of domain scope")}}
+- {{_("Required inputs cannot be obtained")}}
+- {{_("Maximum clarification rounds exceeded")}}
 
-### Fallback Actions
-1. **Acknowledge limitation** — Explain what you can and cannot do
-2. **Suggest alternatives** — Offer related capabilities that might help
-3. **Escalate if critical** — Route to human operator when necessary
+### {{_("Fallback Actions")}}
+1. **{{_("Acknowledge limitation")}}** — {{_("Explain what you can and cannot do")}}
+2. **{{_("Suggest alternatives")}}** — {{_("Offer related capabilities that might help")}}
+3. **{{_("Escalate if critical")}}** — {{_("Route to human operator when necessary")}}
 
 ---
 
-## Escalation Triggers
+## {{_("Escalation Triggers")}}
 
 {{escalation-triggers}}
 
-### When to Escalate
-| Trigger | Action |
+### {{_("When to Escalate")}}
+| {{_("Trigger")}} | {{_("Action")}} |
 |---------|--------|
-| Sensitive data involved | Require human confirmation |
-| Irreversible action | Require explicit user consent |
-| Repeated failures | Escalate to human operator |
-| User frustration detected | Offer human assistance |
-| Out of scope but urgent | Route to appropriate channel |
+| {{_("Sensitive data involved")}} | {{_("Require human confirmation")}} |
+| {{_("Irreversible action")}} | {{_("Require explicit user consent")}} |
+| {{_("Repeated failures")}} | {{_("Escalate to human operator")}} |
+| {{_("User frustration detected")}} | {{_("Offer human assistance")}} |
+| {{_("Out of scope but urgent")}} | {{_("Route to appropriate channel")}} |
 
-### Escalation Format
+### {{_("Escalation Format")}}
 ```
-Je ne suis pas en mesure de traiter cette demande directement.
+{{_("I am not able to process this request directly.")}}
 
-Raison : {explanation}
+{{_("Reason:")}}: {explanation}
 
-Options :
-1. {Alternative within scope}
-2. Contacter un opérateur humain
-3. {Other relevant option}
+{{_("Options:")}}
+1. {{{_("Alternative within scope")}}}
+2. {{_("Contact a human operator")}}
+3. {{{_("Other relevant option")}}}
 ```
 
 ---
 
-## Multi-Step Workflows
+## {{_("Multi-Step Workflows")}}
 
-For complex requests requiring multiple workers:
+{{_("For complex requests requiring multiple workers:")}}
 
-### Sequential Execution
+### {{_("Sequential Execution")}}
 ```
-Request → Worker A → Output A → Worker B → Output B → Final Response
+{{_("Request")}} → Worker A → Output A → Worker B → Output B → {{_("Final Response")}}
 ```
 
-### Parallel Execution (when independent)
+### {{_("Parallel Execution")}} ({{_("when independent")}})
 ```
-Request → ┬→ Worker A → Output A ─┬→ Combine → Final Response
+{{_("Request")}} → ┬→ Worker A → Output A ─┬→ {{_("Combine")}} → {{_("Final Response")}}
           └→ Worker B → Output B ─┘
 ```
 
-### Workflow Rules
-1. Break complex requests into atomic tasks
-2. Determine dependencies between tasks
-3. Execute independent tasks in parallel when possible
-4. Pass outputs from one worker as inputs to the next
-5. Aggregate results before responding to user
+### {{_("Workflow Rules")}}
+1. {{_("Break complex requests into atomic tasks")}}
+2. {{_("Determine dependencies between tasks")}}
+3. {{_("Execute independent tasks in parallel when possible")}}
+4. {{_("Pass outputs from one worker as inputs to the next")}}
+5. {{_("Aggregate results before responding to user")}}
 
 ---
 
-## Quality Assurance
+## {{_("Quality Assurance")}}
 
-### Pre-Routing Checks
-- [ ] User intent is clearly understood
-- [ ] Required information is available
-- [ ] Selected worker can handle the request
-- [ ] No conflicting workers selected
+### {{_("Pre-Routing Checks")}}
+- [ ] {{_("User intent is clearly understood")}}
+- [ ] {{_("Required information is available")}}
+- [ ] {{_("Selected worker can handle the request")}}
+- [ ] {{_("No conflicting workers selected")}}
 
-### Post-Routing Checks
-- [ ] Worker acknowledged the task
-- [ ] Worker has required inputs
-- [ ] Expected output format is clear
-- [ ] Error handling path is defined
+### {{_("Post-Routing Checks")}}
+- [ ] {{_("Worker acknowledged the task")}}
+- [ ] {{_("Worker has required inputs")}}
+- [ ] {{_("Expected output format is clear")}}
+- [ ] {{_("Error handling path is defined")}}
 
 ---
 
-## Metrics to Track
+## {{_("Metrics to Track")}}
 
-| Metric | Description | Target |
+| {{_("Metric")}} | {{_("Description")}} | {{_("Target")}} |
 |--------|-------------|--------|
-| Routing accuracy | % of requests routed to correct worker | >95% |
-| Clarification rate | % of requests needing clarification | <20% |
-| Fallback rate | % of requests hitting fallback | <5% |
-| Escalation rate | % of requests escalated to human | <2% |
-| First-route success | % of requests completed by first worker | >85% |
+| {{_("Routing accuracy")}} | {{_("% of requests routed to correct worker")}} | >95% |
+| {{_("Clarification rate")}} | {{_("% of requests needing clarification")}} | <20% |
+| {{_("Fallback rate")}} | {{_("% of requests hitting fallback")}} | <5% |
+| {{_("Escalation rate")}} | {{_("% of requests escalated to human")}} | <2% |
+| {{_("First-route success")}} | {{_("% of requests completed by first worker")}} | >85% |
