@@ -46,17 +46,18 @@ language: {{agent-language}}
 
 {{worker-success-criteria}}
 
-## Workspace structure
+## Workspace interface
 
-{{worker-workspace-structure}}
-
-## Expected outputs
-
-{{#each worker.expected-outputs }}
-### {{this.output-name}}
-
-```{{this.output-format}}
-{{this.output-sample}}
+{{if worker.workspace == folder }}
+```text
+@workspace/
+├── files/
 ```
-
+{{else if worker.workspace == tools }}
+```text
+- **Tools available**:
+{{#each worker.tools }}
+    - {{this}}
 {{/each}}
+```
+{{/if}}

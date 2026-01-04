@@ -58,7 +58,9 @@ At each step, you will ask the user for clarifications if needed, until you have
 This is where you document the business domain, key processes, and requirements for the supervisor and specialized workers.
 The user will provide information about the business domain and key processes. This document will serve as a reference to update your plan.
 This document will be written in natural language and will provide the human view of the tasks to be accomplished.
-Your task is to translate this view into a clear specification for the supervisor and specialized workers.
+Your task is to translate this view into a clear specification for the supervisor and specialized workers:
+- Validate the workflow with the user.
+- Define the specialized workers needed to accomplish the tasks.
 
 ### The plan (plan.md)
 
@@ -106,23 +108,6 @@ Each checklist item must include a description of the task, its status (to do, i
 ### Worker {{ worker.id }}
 - {{ worker.description }} [ TODO | IN PROGRESS | TO CLARIFY | SPECIFIED ]
 ```
-
-#### Workspace
-
-For a directory structure, use the following format:
-```text
-@workspace/
-├── files/
-```
-
-For tools, use the following format:
-
-```text
-**Tools**:
-- Tool 1: Description
-- Tool 2: Description
-```
-
 
 ### Second stage: Compilation
 
